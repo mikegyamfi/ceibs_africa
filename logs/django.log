@@ -23295,3 +23295,6 @@ django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000
 2025-11-24 10:46:42,861 [WARNING] django.server: "GET /favicon.ico HTTP/1.1" 404 3693
 2025-11-24 11:07:14,281 [INFO] django.utils.autoreload: C:\Users\Gyamfi\Documents\ceibs_africa\ceibs_management\settings.py changed, reloading.
 2025-11-24 11:07:15,647 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2025-11-24 11:10:13,592 [INFO] django.utils.autoreload: C:\Users\Gyamfi\Documents\ceibs_africa\ceibs_management\settings.py changed, reloading.
+2025-11-24 11:10:15,215 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2025-11-24 11:11:04,078 [INFO] django.utils.autoreload: C:\Users\Gyamfi\Documents\ceibs_africa\ceibs_management\settings.py changed, reloading.

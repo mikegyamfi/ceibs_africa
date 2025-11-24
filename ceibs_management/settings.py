@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 from django.core.exceptions import ImproperlyConfigured
 import dj_database_url
 
@@ -26,12 +26,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # Don't run with debug turned on in production!
 DEBUG = True
 
-# Define allowed hosts
-ALLOWED_HOSTS = [
-    'ceibs.osekre.net',
-    '127.0.0.1',
-    'localhost'
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 
 CSRF_TRUSTED_ORIGINS = [
