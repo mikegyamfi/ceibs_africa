@@ -34,7 +34,13 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
+import ssl
+
 REDIS_URL = config('REDIS_URL', 'redis://localhost:6379/0')
+
+# 2. Fix the URL scheme: Heroku gives "redis", we need "rediss" for SSL
+if REDIS_URL.startswith("redis://") and "localhost" not in REDIS_URL:
+    REDIS_URL = REDIS_URL.replace("redis://", "rediss://", 1)
 
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = 'django-db'
@@ -43,6 +49,12 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+# 3. Add SSL settings for Celery so it doesn't fail the handshake
+if "rediss://" in CELERY_BROKER_URL:
+    CELERY_BROKER_USE_SSL = {
+        'ssl_cert_reqs': ssl.CERT_NONE
+    }
 
 # APPLICATION DEFINITION
 
