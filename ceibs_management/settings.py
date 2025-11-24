@@ -1,8 +1,12 @@
 import os
 from pathlib import Path
+
+import sentry_sdk
 from decouple import config, Csv
 from django.core.exceptions import ImproperlyConfigured
 import dj_database_url
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Function to get environment variables or raise an exception
 # def config(var_name, default_value=None):
@@ -350,3 +354,20 @@ if USE_AWS:
     # Tell Django to use S3 for media files
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+SENTRY_DSN = config('SENTRY_DSN', default=None)
+
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[
+            DjangoIntegration(),
+            CeleryIntegration(),
+        ],
+        # Set traces_sample_rate to 1.0 to capture 100% of transactions for performance monitoring.
+        # We recommend adjusting this value in production (e.g., 0.2 for 20%).
+        traces_sample_rate=1.0,
+
+        # If you want to see who caused the error (User ID, Email)
+        send_default_pii=True
+    )
