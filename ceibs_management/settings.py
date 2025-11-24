@@ -234,13 +234,23 @@ LOGOUT_REDIRECT_URL = '/'
 
 # EMAIL CONFIGURATION
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', cast=int, default=10)
+ADMIN_EMAIL = 'gyamfimichael613@gmail.com'
+
+# LOGIC TO CHOOSE SSL OR TLS AUTOMATICALLY
+# If using Port 465, use SSL. If using 587, use TLS.
+if EMAIL_PORT == 465:
+    EMAIL_USE_SSL = True
+    EMAIL_USE_TLS = False
+else:
+    EMAIL_USE_SSL = False
+    EMAIL_USE_TLS = True
 ADMIN_EMAIL = 'gyamfimichael613@gmail.com'
 
 # SECURITY MIDDLEWARE SETTINGS
