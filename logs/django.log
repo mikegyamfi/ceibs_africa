@@ -23251,3 +23251,5 @@ django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '6295-41-66-237
 2025-06-17 14:43:55,732 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2025-06-17 14:44:45,864 [WARNING] kombu.connection: Secure redis scheme specified (rediss) with no ssl options, defaulting to insecure SSL behaviour.
 2025-06-17 14:53:14,933 [INFO] django.utils.autoreload: C:\Users\Michael\Documents\new_ceibs_project\ceibs_management\ceibs_management\settings.py changed, reloading.
+2025-07-20 21:22:17,610 [WARNING] kombu.connection: Secure redis scheme specified (rediss) with no ssl options, defaulting to insecure SSL behaviour.
+2025-07-20 21:23:46,321 [WARNING] kombu.connection: Secure redis scheme specified (rediss) with no ssl options, defaulting to insecure SSL behaviour.
