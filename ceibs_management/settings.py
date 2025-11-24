@@ -29,14 +29,18 @@ DEBUG = True
 # Define allowed hosts
 ALLOWED_HOSTS = [
     'ceibs.osekre.net',
+    '127.0.0.1',
+    'localhost'
 ]
 
-REDIS_URL = config('REDIS_URL')
 
 CSRF_TRUSTED_ORIGINS = [
     'https://ceibs.osekre.net',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+REDIS_URL = config('REDIS_URL', 'redis://localhost:6379/0')
+
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['json']
@@ -44,19 +48,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-
-import ssl
-
-BROKER_USE_SSL = {
-    'ssl_cert_reqs': ssl.CERT_NONE,
-}
-
-from kombu import Exchange, Queue
-
-CELERY_TASK_DEFAULT_QUEUE = "celery"
-CELERY_TASK_QUEUES = (
-    Queue("celery", Exchange("celery"), routing_key="celery"),
-)
 
 # APPLICATION DEFINITION
 
